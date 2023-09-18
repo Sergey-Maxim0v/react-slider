@@ -3,4 +3,5 @@ export interface ISlider {
   autoPlayTime?: number;
   width?: string;
   height?: string;
+  className?: HTMLElement["className"];
 }
