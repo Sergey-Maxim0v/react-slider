@@ -29,14 +29,14 @@ const slideList = [
   </div>,
 ];
 
-const defaultAutoPlayTime = 5000;
-
 const Slider: FC<ISlider> = ({
-  autoPlay = false,
-  autoPlayTime = defaultAutoPlayTime,
+  autoPlay = true,
+  autoPlayTime = 5000,
   width = "100%",
   height = "100%",
 }) => {
+  // TODO: swipe, scroll listeners
+
   const [indexCurrentSlide, setIndexCurrentSlide] = useState<number>(0);
 
   const slidesForRender = useMemo(() => {
@@ -57,29 +57,29 @@ const Slider: FC<ISlider> = ({
 
   const changeSlide = (direction: -1 | 1) => {
     if (direction > 0 && indexCurrentSlide >= slideList.length - 1) {
+      console.log(1);
       setIndexCurrentSlide(0);
       return;
     }
+
     if (direction < 0 && indexCurrentSlide === 0) {
+      console.log(2);
       setIndexCurrentSlide(slideList.length - 1);
       return;
     }
-
+    console.log(3);
     setIndexCurrentSlide((prevState) => prevState + direction);
   };
 
   useEffect(() => {
-    if (!autoPlay) {
+    if (!autoPlay || !autoPlayTime) {
       return;
     }
 
-    const interval = setInterval(
-      () => changeSlide(1),
-      autoPlayTime ?? defaultAutoPlayTime,
-    );
+    const interval = setInterval(() => changeSlide(1), autoPlayTime);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [indexCurrentSlide]);
 
   return (
     <div className={styles.slider} style={{ width, height }}>
@@ -98,9 +98,10 @@ const Slider: FC<ISlider> = ({
       />
 
       <Dots
-        className={styles.dots}
+        length={slideList.length}
         indexCurrentSlide={indexCurrentSlide}
         setIndexCurrentSlide={setIndexCurrentSlide}
+        className={styles.dots}
       />
     </div>
   );

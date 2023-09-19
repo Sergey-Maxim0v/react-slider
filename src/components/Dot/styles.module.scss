@@ -1,0 +1,16 @@
+.dot {
+  margin: 0 8px;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.active {
+  background-color: white;
+  cursor: auto;
+}
