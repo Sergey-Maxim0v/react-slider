@@ -8,9 +8,11 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Sergey-Maxim0v/react-slider)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/Sergey-Maxim0v/react-slider)
+
 </div>
 
 ---
+
 <h2 align="center">Available Scripts</h2>
 
 <p align="center">
@@ -43,13 +45,10 @@ Slider is controlled using the keyboard and mouse.
 
 <div style="text-align: center;">
 
-[//]: # (TODO: pictures)
+[//]: # "TODO: pictures"
+[//]: # '<img src="src/assets/images/readme-1.png" alt="">'
+[//]: # '<img src="src/assets/images/readme-2.png" alt="">'
+[//]: # '<img src="src/assets/images/readme-3.png" alt="">'
+[//]: # '<img src="src/assets/images/readme-4.png" alt="">'
 
-[//]: # (<img src="src/assets/images/readme-1.png" alt="">)
-
-[//]: # (<img src="src/assets/images/readme-2.png" alt="">)
-
-[//]: # (<img src="src/assets/images/readme-3.png" alt="">)
-
-[//]: # (<img src="src/assets/images/readme-4.png" alt="">)
 </div>
