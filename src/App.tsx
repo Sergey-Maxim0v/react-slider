@@ -11,7 +11,17 @@ function App() {
         height: "100vh",
       }}
     >
-      <Slider />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "90%",
+          height: "500px",
+        }}
+      >
+        <Slider />
+      </div>
     </div>
   );
 }
