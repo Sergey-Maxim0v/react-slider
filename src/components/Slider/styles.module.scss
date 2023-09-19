@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .slideList {
@@ -35,17 +36,13 @@
 }
 
 .slide {
-  margin: 0 10px;
   width: max(calc(100% - 120px), 90%);
   min-width: max(calc(100% - 120px), 90%);
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: 768px) {
-    height: 300px;
-  }
+  font-size: max(40px, 5vw);
 
   &_red {
     background-color: red;
