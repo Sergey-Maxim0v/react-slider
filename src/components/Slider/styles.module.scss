@@ -32,10 +32,10 @@ $width-arrow-mobile: 60px;
 
   &__goRight {
     transition: transform 0.2s;
-    transform: translateX(calc($width-arrow-desktop * 6 - 200%));
+    transform: translateX(calc($width-arrow-desktop * 5 - 200%));
 
     @media (max-width: 768px) {
-      transform: translateX(calc($width-arrow-mobile * 6 - 200%));
+      transform: translateX(calc($width-arrow-mobile * 5 - 200%));
     }
   }
 }
@@ -111,5 +111,15 @@ $width-arrow-mobile: 60px;
   &_violet {
     background-color: violet;
     color: white;
+  }
+
+  &_black {
+    background-color: black;
+    color: white;
+  }
+
+  &_white {
+    background-color: antiquewhite;
+    color: black;
   }
 }

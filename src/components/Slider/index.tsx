@@ -27,6 +27,12 @@ const slideList = [
   <div key="slide_6" className={`${styles.slide} ${styles.slide_violet}`}>
     6
   </div>,
+  <div key="slide_7" className={`${styles.slide} ${styles.slide_white}`}>
+    7
+  </div>,
+  <div key="slide_8" className={`${styles.slide} ${styles.slide_black}`}>
+    8
+  </div>,
 ];
 
 const Slider: FC<ISlider> = ({
@@ -38,6 +44,7 @@ const Slider: FC<ISlider> = ({
   // TODO: swipe, scroll listeners
 
   const [indexCurrentSlide, setIndexCurrentSlide] = useState<number>(0);
+  const [animationDirection, setAnimationDirection] = useState<-1 | 0 | 1>(0);
 
   const slidesForRender = useMemo(() => {
     if (indexCurrentSlide === slideList.length - 1) {
@@ -53,9 +60,15 @@ const Slider: FC<ISlider> = ({
     }
 
     return slideList.slice(indexCurrentSlide - 1, indexCurrentSlide + 2);
-  }, [indexCurrentSlide]);
+  }, [indexCurrentSlide, animationDirection]);
 
   const changeSlide = async (direction: -1 | 1) => {
+    setAnimationDirection(direction);
+
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
+    setAnimationDirection(0);
+
     if (direction > 0 && indexCurrentSlide >= slideList.length - 1) {
       setIndexCurrentSlide(0);
       return;
@@ -87,7 +100,13 @@ const Slider: FC<ISlider> = ({
         onClick={() => changeSlide(-1)}
       />
 
-      <div className={styles.slideList}>{slidesForRender.map((el) => el)}</div>
+      <div
+        className={`${styles.slideList} ${
+          animationDirection === -1 ? styles.slideList__goLeft : ""
+        } ${animationDirection === 1 ? styles.slideList__goRight : ""}`}
+      >
+        {slidesForRender.map((el) => el)}
+      </div>
 
       <Arrow
         direction={ARROW_DIRECTION.right}
