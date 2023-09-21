@@ -2,8 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5%;
-  min-width: 60px;
   height: 100%;
   cursor: pointer;
   color: white;
@@ -17,6 +15,7 @@
 
   & svg {
     width: 100%;
+    max-width: 60px;
     height: 100%;
   }
 }

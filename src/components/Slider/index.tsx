@@ -7,30 +7,30 @@ import Dots from "../Dots";
 
 const slideList = [
   <div key="slide_0" className={`${styles.slide} ${styles.slide_red}`}>
-    Slide 0
+    0
   </div>,
   <div key="slide_1" className={`${styles.slide} ${styles.slide_orange}`}>
-    Slide 1
+    1
   </div>,
   <div key="slide_2" className={`${styles.slide} ${styles.slide_yellow}`}>
-    Slide 2
+    2
   </div>,
   <div key="slide_3" className={`${styles.slide} ${styles.slide_green}`}>
-    Slide 3
+    3
   </div>,
   <div key="slide_4" className={`${styles.slide} ${styles.slide_turquoise}`}>
-    Slide 4
+    4
   </div>,
   <div key="slide_5" className={`${styles.slide} ${styles.slide_blue}`}>
-    Slide 5
+    5
   </div>,
   <div key="slide_6" className={`${styles.slide} ${styles.slide_violet}`}>
-    Slide 6
+    6
   </div>,
 ];
 
 const Slider: FC<ISlider> = ({
-  autoPlay = true,
+  autoPlay = false,
   autoPlayTime = 5000,
   width = "100%",
   height = "100%",
@@ -55,19 +55,17 @@ const Slider: FC<ISlider> = ({
     return slideList.slice(indexCurrentSlide - 1, indexCurrentSlide + 2);
   }, [indexCurrentSlide]);
 
-  const changeSlide = (direction: -1 | 1) => {
+  const changeSlide = async (direction: -1 | 1) => {
     if (direction > 0 && indexCurrentSlide >= slideList.length - 1) {
-      console.log(1);
       setIndexCurrentSlide(0);
       return;
     }
 
     if (direction < 0 && indexCurrentSlide === 0) {
-      console.log(2);
       setIndexCurrentSlide(slideList.length - 1);
       return;
     }
-    console.log(3);
+
     setIndexCurrentSlide((prevState) => prevState + direction);
   };
 

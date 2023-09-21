@@ -1,9 +1,13 @@
+$width-arrow-desktop: 100px;
+$width-arrow-mobile: 60px;
+
 .slider {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .slideList {
@@ -11,15 +15,41 @@
   height: 100%;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  transform: translateX(calc($width-arrow-desktop * 3 - 100%));
+
+  @media (max-width: 768px) {
+    transform: translateX(calc($width-arrow-mobile * 3 - 100%));
+  }
+
+  &__goLeft {
+    transition: transform 0.2s;
+    transform: translateX($width-arrow-desktop);
+
+    @media (max-width: 768px) {
+      transform: translateX($width-arrow-mobile);
+    }
+  }
+
+  &__goRight {
+    transition: transform 0.2s;
+    transform: translateX(calc($width-arrow-desktop * 6 - 200%));
+
+    @media (max-width: 768px) {
+      transform: translateX(calc($width-arrow-mobile * 6 - 200%));
+    }
+  }
 }
 
 .arrow {
+  z-index: 100;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: red;
-  width: 45%;
+  width: $width-arrow-desktop;
+
+  @media (max-width: 768px) {
+    width: $width-arrow-mobile;
+  }
 
   &_left {
     left: 0;
@@ -36,13 +66,17 @@
 }
 
 .slide {
-  width: max(calc(100% - 120px), 90%);
-  min-width: max(calc(100% - 120px), 90%);
+  width: 100%;
+  min-width: calc(100% - $width-arrow-desktop * 2);
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: max(40px, 5vw);
+
+  @media (max-width: 768px) {
+    min-width: calc(100% - $width-arrow-mobile * 2);
+  }
 
   &_red {
     background-color: red;
