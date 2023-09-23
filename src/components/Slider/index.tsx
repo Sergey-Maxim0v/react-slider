@@ -5,7 +5,6 @@ import Arrow from "../Arrow";
 import { ARROW_DIRECTION } from "../Arrow/types";
 import Dots from "../Dots";
 import Slide from "../Slide";
-import { getDelay } from "../../utils/asincDelay";
 
 const SLIDE_NUM_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 const ANIMATION_TIME = 200;
@@ -23,35 +22,68 @@ const Slider: FC<ISlider> = ({
   const [numSlidesForRender, setNumSlidesForRender] = useState<number[]>([]);
 
   useEffect(() => {
-    if (indexCurrentSlide === SLIDE_NUM_LIST.length - 1) {
+    if (!SLIDE_NUM_LIST[indexCurrentSlide - 1]) {
       setNumSlidesForRender([
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 2],
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
-        SLIDE_NUM_LIST[0],
+        SLIDE_NUM_LIST[indexCurrentSlide],
+        SLIDE_NUM_LIST[indexCurrentSlide + 1],
+        SLIDE_NUM_LIST[indexCurrentSlide + 2],
       ]);
       return;
     }
 
-    if (indexCurrentSlide === 0) {
+    if (!SLIDE_NUM_LIST[indexCurrentSlide - 2]) {
       setNumSlidesForRender([
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
+        SLIDE_NUM_LIST[indexCurrentSlide - 1],
+        SLIDE_NUM_LIST[indexCurrentSlide],
+        SLIDE_NUM_LIST[indexCurrentSlide + 1],
+        SLIDE_NUM_LIST[indexCurrentSlide + 2],
+      ]);
+      return;
+    }
+
+    if (!SLIDE_NUM_LIST[indexCurrentSlide + 1]) {
+      setNumSlidesForRender([
+        SLIDE_NUM_LIST[indexCurrentSlide - 2],
+        SLIDE_NUM_LIST[indexCurrentSlide - 1],
+        SLIDE_NUM_LIST[indexCurrentSlide],
         SLIDE_NUM_LIST[0],
         SLIDE_NUM_LIST[1],
       ]);
       return;
     }
 
-    setNumSlidesForRender(
-      SLIDE_NUM_LIST.slice(indexCurrentSlide - 1, indexCurrentSlide + 2),
-    );
-  }, [indexCurrentSlide, animationDirection]);
+    if (!SLIDE_NUM_LIST[indexCurrentSlide + 2]) {
+      setNumSlidesForRender([
+        SLIDE_NUM_LIST[indexCurrentSlide - 2],
+        SLIDE_NUM_LIST[indexCurrentSlide - 1],
+        SLIDE_NUM_LIST[indexCurrentSlide],
+        SLIDE_NUM_LIST[indexCurrentSlide + 1],
+        SLIDE_NUM_LIST[0],
+      ]);
+      return;
+    }
+
+    setNumSlidesForRender([
+      SLIDE_NUM_LIST[indexCurrentSlide - 2],
+      SLIDE_NUM_LIST[indexCurrentSlide - 1],
+      SLIDE_NUM_LIST[indexCurrentSlide],
+      SLIDE_NUM_LIST[indexCurrentSlide + 1],
+      SLIDE_NUM_LIST[indexCurrentSlide + 2],
+    ]);
+  }, [indexCurrentSlide]);
 
   const changeSlide = async (direction: -1 | 1) => {
     setAnimationDirection(direction);
 
-    await getDelay(ANIMATION_TIME);
+    await new Promise((resolve) => setTimeout(resolve, ANIMATION_TIME));
 
     setAnimationDirection(0);
+
+    // TODO: переключение с крайнего слайда дальше, пока не закончилась анимация,
+    //  провоцирует ошибку: indexCurrentSlide выходит за пределы
 
     if (direction > 0 && indexCurrentSlide >= SLIDE_NUM_LIST.length - 1) {
       setIndexCurrentSlide(0);

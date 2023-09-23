@@ -15,27 +15,27 @@ $width-arrow-mobile: 60px;
   height: 100%;
   display: flex;
   align-items: center;
-  transform: translateX(calc($width-arrow-desktop * 3 - 100%));
+  transform: translateX(calc($width-arrow-desktop * 5 - 200%));
 
   @media (max-width: 768px) {
-    transform: translateX(calc($width-arrow-mobile * 3 - 100%));
+    transform: translateX(calc($width-arrow-mobile * 5 - 200%));
   }
 
   &__goLeft {
     transition: transform 0.2s;
-    transform: translateX($width-arrow-desktop);
+    transform: translateX(calc($width-arrow-desktop * 3 - 100%));
 
     @media (max-width: 768px) {
-      transform: translateX($width-arrow-mobile);
+      transform: translateX(calc($width-arrow-mobile * 3 - 100%));
     }
   }
 
   &__goRight {
     transition: transform 0.2s;
-    transform: translateX(calc($width-arrow-desktop * 5 - 200%));
+    transform: translateX(calc($width-arrow-desktop * 7 - 300%));
 
     @media (max-width: 768px) {
-      transform: translateX(calc($width-arrow-mobile * 5 - 200%));
+      transform: translateX(calc($width-arrow-mobile * 7 - 300%));
     }
   }
 }
