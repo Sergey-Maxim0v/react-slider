@@ -3,71 +3,37 @@ import { ISlide } from "./types";
 import styles from "./styles.module.scss";
 
 const Slide: FC<ISlide> = ({ number, className }) => {
-  switch (number) {
-    case 0:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_red}`}>
-          0
-        </div>
-      );
-    case 1:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_orange}`}>
-          1
-        </div>
-      );
-    case 2:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_yellow}`}>
-          2
-        </div>
-      );
-    case 3:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_green}`}>
-          3
-        </div>
-      );
-    case 4:
-      return (
-        <div
-          className={`${className} ${styles.slide} ${styles.slide_turquoise}`}
-        >
-          4
-        </div>
-      );
-    case 5:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_blue}`}>
-          5
-        </div>
-      );
-    case 6:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_violet}`}>
-          6
-        </div>
-      );
-    case 7:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_white}`}>
-          7
-        </div>
-      );
-    case 8:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_black}`}>
-          8
-        </div>
-      );
+  const getColorClassName = () => {
+    switch (number) {
+      case 0:
+        return styles.slide_red;
+      case 1:
+        return styles.slide_orange;
+      case 2:
+        return styles.slide_yellow;
+      case 3:
+        return styles.slide_green;
+      case 4:
+        return styles.slide_turquoise;
+      case 5:
+        return styles.slide_blue;
+      case 6:
+        return styles.slide_violet;
+      case 7:
+        return styles.slide_white;
+      case 8:
+        return styles.slide_black;
 
-    default:
-      return (
-        <div className={`${className} ${styles.slide} ${styles.slide_white}`}>
-          slide {number}
-        </div>
-      );
-  }
+      default:
+        return styles.slide_white;
+    }
+  };
+
+  return (
+    <div className={`${className} ${styles.slide} ${getColorClassName()}`}>
+      {number}
+    </div>
+  );
 };
 
 export default Slide;
