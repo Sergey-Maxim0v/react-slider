@@ -1,39 +1,12 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ISlider } from "./types";
 import styles from "./styles.module.scss";
 import Arrow from "../Arrow";
 import { ARROW_DIRECTION } from "../Arrow/types";
 import Dots from "../Dots";
+import Slide from "../Slide";
 
-const slideList = [
-  <div key="slide_0" className={`${styles.slide} ${styles.slide_red}`}>
-    0
-  </div>,
-  <div key="slide_1" className={`${styles.slide} ${styles.slide_orange}`}>
-    1
-  </div>,
-  <div key="slide_2" className={`${styles.slide} ${styles.slide_yellow}`}>
-    2
-  </div>,
-  <div key="slide_3" className={`${styles.slide} ${styles.slide_green}`}>
-    3
-  </div>,
-  <div key="slide_4" className={`${styles.slide} ${styles.slide_turquoise}`}>
-    4
-  </div>,
-  <div key="slide_5" className={`${styles.slide} ${styles.slide_blue}`}>
-    5
-  </div>,
-  <div key="slide_6" className={`${styles.slide} ${styles.slide_violet}`}>
-    6
-  </div>,
-  <div key="slide_7" className={`${styles.slide} ${styles.slide_white}`}>
-    7
-  </div>,
-  <div key="slide_8" className={`${styles.slide} ${styles.slide_black}`}>
-    8
-  </div>,
-];
+const SLIDE_NUM_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 const Slider: FC<ISlider> = ({
   autoPlay = false,
@@ -41,25 +14,34 @@ const Slider: FC<ISlider> = ({
   width = "100%",
   height = "100%",
 }) => {
-  // TODO: swipe, scroll listeners
+  // TODO: swipe, scroll, keyboard listeners
 
   const [indexCurrentSlide, setIndexCurrentSlide] = useState<number>(0);
   const [animationDirection, setAnimationDirection] = useState<-1 | 0 | 1>(0);
+  const [numSlidesForRender, setNumSlidesForRender] = useState<number[]>([]);
 
-  const slidesForRender = useMemo(() => {
-    if (indexCurrentSlide === slideList.length - 1) {
-      return [
-        slideList[slideList.length - 2],
-        slideList[slideList.length - 1],
-        slideList[0],
-      ];
+  useEffect(() => {
+    if (indexCurrentSlide === SLIDE_NUM_LIST.length - 1) {
+      setNumSlidesForRender([
+        SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 2],
+        SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
+        SLIDE_NUM_LIST[0],
+      ]);
+      return;
     }
 
     if (indexCurrentSlide === 0) {
-      return [slideList[slideList.length - 1], slideList[0], slideList[1]];
+      setNumSlidesForRender([
+        SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
+        SLIDE_NUM_LIST[0],
+        SLIDE_NUM_LIST[1],
+      ]);
+      return;
     }
 
-    return slideList.slice(indexCurrentSlide - 1, indexCurrentSlide + 2);
+    setNumSlidesForRender(
+      SLIDE_NUM_LIST.slice(indexCurrentSlide - 1, indexCurrentSlide + 2),
+    );
   }, [indexCurrentSlide, animationDirection]);
 
   const changeSlide = async (direction: -1 | 1) => {
@@ -69,13 +51,13 @@ const Slider: FC<ISlider> = ({
 
     setAnimationDirection(0);
 
-    if (direction > 0 && indexCurrentSlide >= slideList.length - 1) {
+    if (direction > 0 && indexCurrentSlide >= SLIDE_NUM_LIST.length - 1) {
       setIndexCurrentSlide(0);
       return;
     }
 
     if (direction < 0 && indexCurrentSlide === 0) {
-      setIndexCurrentSlide(slideList.length - 1);
+      setIndexCurrentSlide(SLIDE_NUM_LIST.length - 1);
       return;
     }
 
@@ -105,7 +87,9 @@ const Slider: FC<ISlider> = ({
           animationDirection === -1 ? styles.slideList__goLeft : ""
         } ${animationDirection === 1 ? styles.slideList__goRight : ""}`}
       >
-        {slidesForRender.map((el) => el)}
+        {numSlidesForRender.map((num) => (
+          <Slide key={num} number={num} className={styles.slide} />
+        ))}
       </div>
 
       <Arrow
@@ -115,7 +99,7 @@ const Slider: FC<ISlider> = ({
       />
 
       <Dots
-        length={slideList.length}
+        length={SLIDE_NUM_LIST.length}
         indexCurrentSlide={indexCurrentSlide}
         setIndexCurrentSlide={setIndexCurrentSlide}
         className={styles.dots}

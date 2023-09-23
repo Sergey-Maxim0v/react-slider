@@ -69,57 +69,8 @@ $width-arrow-mobile: 60px;
   width: 100%;
   min-width: calc(100% - $width-arrow-desktop * 2);
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: max(40px, 5vw);
 
   @media (max-width: 768px) {
     min-width: calc(100% - $width-arrow-mobile * 2);
-  }
-
-  &_red {
-    background-color: red;
-    color: white;
-  }
-
-  &_orange {
-    background-color: orange;
-    color: black;
-  }
-
-  &_yellow {
-    background-color: yellow;
-    color: black;
-  }
-
-  &_green {
-    background-color: green;
-    color: white;
-  }
-
-  &_turquoise {
-    background-color: turquoise;
-    color: black;
-  }
-
-  &_blue {
-    background-color: blue;
-    color: white;
-  }
-
-  &_violet {
-    background-color: violet;
-    color: white;
-  }
-
-  &_black {
-    background-color: black;
-    color: white;
-  }
-
-  &_white {
-    background-color: antiquewhite;
-    color: black;
   }
 }
