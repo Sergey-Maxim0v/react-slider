@@ -5,8 +5,10 @@ import Arrow from "../Arrow";
 import { ARROW_DIRECTION } from "../Arrow/types";
 import Dots from "../Dots";
 import Slide from "../Slide";
+import { getDelay } from "../../utils/asincDelay";
 
 const SLIDE_NUM_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const ANIMATION_TIME = 200;
 
 const Slider: FC<ISlider> = ({
   autoPlay = false,
@@ -47,7 +49,7 @@ const Slider: FC<ISlider> = ({
   const changeSlide = async (direction: -1 | 1) => {
     setAnimationDirection(direction);
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await getDelay(ANIMATION_TIME);
 
     setAnimationDirection(0);
 
