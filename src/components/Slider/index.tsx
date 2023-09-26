@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ISlider } from "./types";
 import styles from "./styles.module.scss";
 import Arrow from "../Arrow";
@@ -82,20 +82,17 @@ const Slider: FC<ISlider> = ({
 
     setAnimationDirection(0);
 
-    // TODO: переключение с крайнего слайда дальше, пока не закончилась анимация,
-    //  провоцирует ошибку: indexCurrentSlide выходит за пределы
+    setIndexCurrentSlide((prevState) => {
+      if (direction > 0 && prevState >= SLIDE_NUM_LIST.length - 1) {
+        return 0;
+      }
 
-    if (direction > 0 && indexCurrentSlide >= SLIDE_NUM_LIST.length - 1) {
-      setIndexCurrentSlide(0);
-      return;
-    }
+      if (direction < 0 && prevState === 0) {
+        return SLIDE_NUM_LIST.length - 1;
+      }
 
-    if (direction < 0 && indexCurrentSlide === 0) {
-      setIndexCurrentSlide(SLIDE_NUM_LIST.length - 1);
-      return;
-    }
-
-    setIndexCurrentSlide((prevState) => prevState + direction);
+      return prevState + direction;
+    });
   };
 
   useEffect(() => {

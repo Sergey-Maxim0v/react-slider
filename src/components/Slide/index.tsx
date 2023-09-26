@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { ISlide } from "./types";
 import styles from "./styles.module.scss";
 

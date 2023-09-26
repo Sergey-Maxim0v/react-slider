@@ -20,7 +20,7 @@ function App() {
           height: "500px",
         }}
       >
-        <Slider />
+        <Slider autoPlay autoPlayTime={2000} />
       </div>
     </div>
   );

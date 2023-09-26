@@ -3,7 +3,7 @@ import { FC } from "react";
 import { IDots } from "./types";
 import Dot from "../Dot";
 
-const getDotsNumArr = (length) => {
+const getDotsNumArr = (length: number) => {
   const result = [];
 
   for (let i = 0; i < length; i++) {
