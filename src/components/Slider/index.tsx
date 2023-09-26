@@ -22,7 +22,7 @@ const Slider: FC<ISlider> = ({
   const [numSlidesForRender, setNumSlidesForRender] = useState<number[]>([]);
 
   useEffect(() => {
-    if (!SLIDE_NUM_LIST[indexCurrentSlide - 1]) {
+    if (SLIDE_NUM_LIST[indexCurrentSlide - 1] === undefined) {
       setNumSlidesForRender([
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 2],
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
@@ -33,7 +33,7 @@ const Slider: FC<ISlider> = ({
       return;
     }
 
-    if (!SLIDE_NUM_LIST[indexCurrentSlide - 2]) {
+    if (SLIDE_NUM_LIST[indexCurrentSlide - 2] === undefined) {
       setNumSlidesForRender([
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
         SLIDE_NUM_LIST[indexCurrentSlide - 1],
@@ -44,7 +44,7 @@ const Slider: FC<ISlider> = ({
       return;
     }
 
-    if (!SLIDE_NUM_LIST[indexCurrentSlide + 1]) {
+    if (SLIDE_NUM_LIST[indexCurrentSlide + 1] === undefined) {
       setNumSlidesForRender([
         SLIDE_NUM_LIST[indexCurrentSlide - 2],
         SLIDE_NUM_LIST[indexCurrentSlide - 1],
@@ -55,7 +55,7 @@ const Slider: FC<ISlider> = ({
       return;
     }
 
-    if (!SLIDE_NUM_LIST[indexCurrentSlide + 2]) {
+    if (SLIDE_NUM_LIST[indexCurrentSlide + 2] === undefined) {
       setNumSlidesForRender([
         SLIDE_NUM_LIST[indexCurrentSlide - 2],
         SLIDE_NUM_LIST[indexCurrentSlide - 1],
