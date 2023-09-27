@@ -7,22 +7,24 @@ export const useGetNumSlidesForRender = ({
   SLIDE_NUM_LIST: number[];
   indexCurrentSlide: number;
 }) => {
-  const [numSlidesForRender, setNumSlidesForRender] = useState<number[]>([]);
+  const [numListSlidesForRender, setNumListSlidesForRender] = useState<
+    number[]
+  >([]);
 
   useEffect(() => {
     if (SLIDE_NUM_LIST[indexCurrentSlide - 1] === undefined) {
-      setNumSlidesForRender([
+      setNumListSlidesForRender([
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 2],
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
         SLIDE_NUM_LIST[indexCurrentSlide],
-        SLIDE_NUM_LIST[SLIDE_NUM_LIST + 1],
+        SLIDE_NUM_LIST[indexCurrentSlide + 1],
         SLIDE_NUM_LIST[indexCurrentSlide + 2],
       ]);
       return;
     }
 
     if (SLIDE_NUM_LIST[indexCurrentSlide - 2] === undefined) {
-      setNumSlidesForRender([
+      setNumListSlidesForRender([
         SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
         SLIDE_NUM_LIST[indexCurrentSlide - 1],
         SLIDE_NUM_LIST[indexCurrentSlide],
@@ -33,7 +35,7 @@ export const useGetNumSlidesForRender = ({
     }
 
     if (SLIDE_NUM_LIST[indexCurrentSlide + 1] === undefined) {
-      setNumSlidesForRender([
+      setNumListSlidesForRender([
         SLIDE_NUM_LIST[indexCurrentSlide - 2],
         SLIDE_NUM_LIST[indexCurrentSlide - 1],
         SLIDE_NUM_LIST[indexCurrentSlide],
@@ -44,7 +46,7 @@ export const useGetNumSlidesForRender = ({
     }
 
     if (SLIDE_NUM_LIST[indexCurrentSlide + 2] === undefined) {
-      setNumSlidesForRender([
+      setNumListSlidesForRender([
         SLIDE_NUM_LIST[indexCurrentSlide - 2],
         SLIDE_NUM_LIST[indexCurrentSlide - 1],
         SLIDE_NUM_LIST[indexCurrentSlide],
@@ -54,7 +56,7 @@ export const useGetNumSlidesForRender = ({
       return;
     }
 
-    setNumSlidesForRender([
+    setNumListSlidesForRender([
       SLIDE_NUM_LIST[indexCurrentSlide - 2],
       SLIDE_NUM_LIST[indexCurrentSlide - 1],
       SLIDE_NUM_LIST[indexCurrentSlide],
@@ -63,5 +65,5 @@ export const useGetNumSlidesForRender = ({
     ]);
   }, [indexCurrentSlide]);
 
-  return numSlidesForRender;
+  return numListSlidesForRender;
 };

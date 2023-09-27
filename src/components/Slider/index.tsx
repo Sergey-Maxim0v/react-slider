@@ -24,7 +24,7 @@ const Slider: FC<ISlider> = ({
   const [indexCurrentSlide, setIndexCurrentSlide] = useState<number>(0);
   const [animationDirection, setAnimationDirection] = useState<-1 | 0 | 1>(0);
 
-  const numSlidesForRender = useGetNumSlidesForRender({
+  const numListSlidesForRender = useGetNumSlidesForRender({
     SLIDE_NUM_LIST,
     indexCurrentSlide,
   });
@@ -69,7 +69,7 @@ const Slider: FC<ISlider> = ({
           animationDirection === -1 ? styles.slideList__goLeft : ""
         } ${animationDirection === 1 ? styles.slideList__goRight : ""}`}
       >
-        {numSlidesForRender.map((num) => (
+        {numListSlidesForRender.map((num) => (
           <Slide
             key={`${indexCurrentSlide} ${num} `}
             number={num}

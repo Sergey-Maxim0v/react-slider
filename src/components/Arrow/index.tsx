@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 const Arrow: FC<IArrow> = ({ direction, className, onClick }) => {
   return (
-    <div
+    <button
       className={`${className} ${styles.arrow} ${styles[direction]}`}
       onClick={() => onClick()}
     >
@@ -19,7 +19,7 @@ const Arrow: FC<IArrow> = ({ direction, className, onClick }) => {
           d="M6.23 20.23L8 22l10-10L8 2L6.23 3.77L14.46 12z"
         />
       </svg>
-    </div>
+    </button>
   );
 };
 
