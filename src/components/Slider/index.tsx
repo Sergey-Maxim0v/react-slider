@@ -5,6 +5,7 @@ import Arrow from "../Arrow";
 import { ARROW_DIRECTION } from "../Arrow/types";
 import Dots from "../Dots";
 import Slide from "../Slide";
+import { useGetNumSlidesForRender } from "../../hooks/useGetNumSlidesForRender";
 
 const SLIDE_NUM_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 const ANIMATION_TIME = 200;
@@ -17,63 +18,16 @@ const Slider: FC<ISlider> = ({
 }) => {
   // TODO: swipe, scroll, keyboard listeners
 
+  // TODO: scale rotate animations
+
   const [indexCurrentSlide, setIndexCurrentSlide] = useState<number>(0);
   const [animationDirection, setAnimationDirection] = useState<-1 | 0 | 1>(0);
-  const [numSlidesForRender, setNumSlidesForRender] = useState<number[]>([]);
+  const [isInFocus, setIsInFocus] = useState(false);
 
-  useEffect(() => {
-    if (SLIDE_NUM_LIST[indexCurrentSlide - 1] === undefined) {
-      setNumSlidesForRender([
-        SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 2],
-        SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
-        SLIDE_NUM_LIST[indexCurrentSlide],
-        SLIDE_NUM_LIST[indexCurrentSlide + 1],
-        SLIDE_NUM_LIST[indexCurrentSlide + 2],
-      ]);
-      return;
-    }
-
-    if (SLIDE_NUM_LIST[indexCurrentSlide - 2] === undefined) {
-      setNumSlidesForRender([
-        SLIDE_NUM_LIST[SLIDE_NUM_LIST.length - 1],
-        SLIDE_NUM_LIST[indexCurrentSlide - 1],
-        SLIDE_NUM_LIST[indexCurrentSlide],
-        SLIDE_NUM_LIST[indexCurrentSlide + 1],
-        SLIDE_NUM_LIST[indexCurrentSlide + 2],
-      ]);
-      return;
-    }
-
-    if (SLIDE_NUM_LIST[indexCurrentSlide + 1] === undefined) {
-      setNumSlidesForRender([
-        SLIDE_NUM_LIST[indexCurrentSlide - 2],
-        SLIDE_NUM_LIST[indexCurrentSlide - 1],
-        SLIDE_NUM_LIST[indexCurrentSlide],
-        SLIDE_NUM_LIST[0],
-        SLIDE_NUM_LIST[1],
-      ]);
-      return;
-    }
-
-    if (SLIDE_NUM_LIST[indexCurrentSlide + 2] === undefined) {
-      setNumSlidesForRender([
-        SLIDE_NUM_LIST[indexCurrentSlide - 2],
-        SLIDE_NUM_LIST[indexCurrentSlide - 1],
-        SLIDE_NUM_LIST[indexCurrentSlide],
-        SLIDE_NUM_LIST[indexCurrentSlide + 1],
-        SLIDE_NUM_LIST[0],
-      ]);
-      return;
-    }
-
-    setNumSlidesForRender([
-      SLIDE_NUM_LIST[indexCurrentSlide - 2],
-      SLIDE_NUM_LIST[indexCurrentSlide - 1],
-      SLIDE_NUM_LIST[indexCurrentSlide],
-      SLIDE_NUM_LIST[indexCurrentSlide + 1],
-      SLIDE_NUM_LIST[indexCurrentSlide + 2],
-    ]);
-  }, [indexCurrentSlide]);
+  const numSlidesForRender = useGetNumSlidesForRender({
+    SLIDE_NUM_LIST,
+    indexCurrentSlide,
+  });
 
   const changeSlide = async (direction: -1 | 1) => {
     setAnimationDirection(direction);
@@ -106,7 +60,12 @@ const Slider: FC<ISlider> = ({
   }, [indexCurrentSlide]);
 
   return (
-    <div className={styles.slider} style={{ width, height }}>
+    <div
+      className={styles.slider}
+      style={{ width, height }}
+      onFocus={() => setIsInFocus(true)}
+      onfocusout={() => setIsInFocus(false)}
+    >
       <Arrow
         direction={ARROW_DIRECTION.left}
         className={`${styles.arrow} ${styles.arrow_left}`}
