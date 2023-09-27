@@ -8,6 +8,7 @@ import Slide from "../Slide";
 import { useGetNumSlidesForRender } from "../../hooks/useGetNumSlidesForRender";
 import { useAutoplayChangeSlides } from "../../hooks/useAutoplayChangeSlides";
 import { useKeyboardListener } from "../../hooks/useKeyboardListener";
+import { useSwipe } from "../../hooks/useSwipe";
 
 const SLIDE_NUM_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 const ANIMATION_TIME = 200;
@@ -62,6 +63,12 @@ const Slider: FC<ISlider> = ({
   });
 
   useKeyboardListener({ sliderRef, isInFocus, changeSlide });
+
+  useSwipe({
+    ref: sliderRef,
+    onLeft: () => changeSlide(-1),
+    onRight: () => changeSlide(1),
+  });
 
   return (
     <div
