@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import Slide from "../components/Slide";
 
 export const useGetSlideNodeList = ({
@@ -7,7 +7,7 @@ export const useGetSlideNodeList = ({
 }: {
   slidesCount: number;
   className: string;
-}) =>
+}): ReactElement[] =>
   useMemo(() => {
     const result = [];
     for (let i = 0; i <= slidesCount; i++) {
