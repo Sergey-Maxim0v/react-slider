@@ -8,6 +8,10 @@ $width-arrow-mobile: 60px;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.2);
   overflow: hidden;
+
+  &:active {
+    cursor: grab;
+  }
 }
 
 .slideList {
