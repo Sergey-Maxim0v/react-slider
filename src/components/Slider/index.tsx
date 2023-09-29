@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import { ISlider } from "./types";
 import styles from "./styles.module.scss";
 import Arrow from "../Arrow";
@@ -10,8 +10,8 @@ import { useAutoplayChangeSlides } from "../../hooks/useAutoplayChangeSlides";
 import { useKeyboardListener } from "../../hooks/useKeyboardListener";
 import { useSwipe } from "../../hooks/useSwipe";
 
-const SLIDE_NUM_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 const ANIMATION_TIME = 200;
+const SLIDES_COUNT = 8;
 
 const Slider: FC<ISlider> = ({
   autoPlay = false,
@@ -19,7 +19,7 @@ const Slider: FC<ISlider> = ({
   width = "100%",
   height = "100%",
 }) => {
-  // TODO: swipe, scroll listeners
+  // TODO: mouse move, scroll listeners
 
   // TODO: scale rotate animations
 
@@ -30,8 +30,17 @@ const Slider: FC<ISlider> = ({
   const [animationDirection, setAnimationDirection] = useState<-1 | 0 | 1>(0);
   const [isInFocus, setIsInFocus] = useState(false);
 
+  const slideList = useMemo(() => {
+    const result = [];
+
+    for (let i = 0; i <= SLIDES_COUNT; i++) {
+      result.push(<Slide key={`${i}`} number={i} className={styles.slide} />);
+    }
+    return result;
+  }, []);
+
   const numListSlidesForRender = useGetNumSlidesForRender({
-    SLIDE_NUM_LIST,
+    SLIDES_COUNT,
     indexCurrentSlide,
   });
 
@@ -43,12 +52,12 @@ const Slider: FC<ISlider> = ({
     setAnimationDirection(0);
 
     setIndexCurrentSlide((prevState) => {
-      if (direction > 0 && prevState >= SLIDE_NUM_LIST.length - 1) {
+      if (direction > 0 && prevState >= SLIDES_COUNT) {
         return 0;
       }
 
       if (direction < 0 && prevState === 0) {
-        return SLIDE_NUM_LIST.length - 1;
+        return SLIDES_COUNT;
       }
 
       return prevState + direction;
@@ -89,13 +98,7 @@ const Slider: FC<ISlider> = ({
           animationDirection === -1 ? styles.slideList__goLeft : ""
         } ${animationDirection === 1 ? styles.slideList__goRight : ""}`}
       >
-        {numListSlidesForRender.map((num) => (
-          <Slide
-            key={`${indexCurrentSlide} ${num} `}
-            number={num}
-            className={styles.slide}
-          />
-        ))}
+        {numListSlidesForRender.map((num) => slideList[num])}
       </div>
 
       <Arrow
@@ -105,7 +108,7 @@ const Slider: FC<ISlider> = ({
       />
 
       <Dots
-        length={SLIDE_NUM_LIST.length}
+        length={SLIDES_COUNT}
         indexCurrentSlide={indexCurrentSlide}
         setIndexCurrentSlide={setIndexCurrentSlide}
         className={styles.dots}
