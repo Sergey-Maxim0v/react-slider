@@ -6,7 +6,7 @@ import Dot from "../Dot";
 const getDotsNumArr = (length: number) => {
   const result = [];
 
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i <= length; i++) {
     result.push(i);
   }
   return result;
