@@ -1,14 +1,14 @@
-import { FC, useMemo, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { ISlider } from "./types";
 import styles from "./styles.module.scss";
 import Arrow from "../Arrow";
 import { ARROW_DIRECTION } from "../Arrow/types";
 import Dots from "../Dots";
-import Slide from "../Slide";
 import { useGetNumSlidesForRender } from "../../hooks/useGetNumSlidesForRender";
 import { useAutoplayChangeSlides } from "../../hooks/useAutoplayChangeSlides";
 import { useKeyboardListener } from "../../hooks/useKeyboardListener";
 import { useSwipe } from "../../hooks/useSwipe";
+import { useGetSlideNodeList } from "../../hooks/useGetSlideNodeList";
 
 const ANIMATION_TIME = 200;
 const SLIDES_COUNT = 8;
@@ -30,14 +30,10 @@ const Slider: FC<ISlider> = ({
   const [animationDirection, setAnimationDirection] = useState<-1 | 0 | 1>(0);
   const [isInFocus, setIsInFocus] = useState(false);
 
-  const slideList = useMemo(() => {
-    const result = [];
-
-    for (let i = 0; i <= SLIDES_COUNT; i++) {
-      result.push(<Slide key={`${i}`} number={i} className={styles.slide} />);
-    }
-    return result;
-  }, []);
+  const slideNodeList = useGetSlideNodeList({
+    slidesCount: SLIDES_COUNT,
+    className: styles.slide,
+  });
 
   const numListSlidesForRender = useGetNumSlidesForRender({
     SLIDES_COUNT,
@@ -98,7 +94,7 @@ const Slider: FC<ISlider> = ({
           animationDirection === -1 ? styles.slideList__goLeft : ""
         } ${animationDirection === 1 ? styles.slideList__goRight : ""}`}
       >
-        {numListSlidesForRender.map((num) => slideList[num])}
+        {numListSlidesForRender.map((num) => slideNodeList[num])}
       </div>
 
       <Arrow
