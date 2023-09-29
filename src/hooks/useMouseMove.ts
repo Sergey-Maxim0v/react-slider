@@ -65,11 +65,11 @@ export const useMouseMove = ({
     };
 
     target.addEventListener("mousedown", handleMouseDown);
-    target.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseup", handleMouseUp);
 
     return () => {
       target.removeEventListener("mousedown", handleMouseDown);
-      target.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
   }, [ref.current]);
 };
