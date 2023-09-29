@@ -9,6 +9,7 @@ import { useAutoplayChangeSlides } from "../../hooks/useAutoplayChangeSlides";
 import { useKeyboardListener } from "../../hooks/useKeyboardListener";
 import { useSwipe } from "../../hooks/useSwipe";
 import { useGetSlideNodeList } from "../../hooks/useGetSlideNodeList";
+import { useMouseMove } from "../../hooks/useMouseMove";
 
 const ANIMATION_TIME = 200;
 const SLIDES_COUNT = 8;
@@ -70,6 +71,12 @@ const Slider: FC<ISlider> = ({
   useKeyboardListener({ sliderRef, isInFocus, changeSlide });
 
   useSwipe({
+    ref: sliderRef,
+    onLeft: () => changeSlide(-1),
+    onRight: () => changeSlide(1),
+  });
+
+  useMouseMove({
     ref: sliderRef,
     onLeft: () => changeSlide(-1),
     onRight: () => changeSlide(1),
