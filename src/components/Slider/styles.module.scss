@@ -9,10 +9,6 @@ $scale-no-current-slide: 80%;
   justify-content: center;
   background-color: transparent;
   overflow: hidden;
-
-  &:active {
-    cursor: grab;
-  }
 }
 
 .slideList {
@@ -24,6 +20,10 @@ $scale-no-current-slide: 80%;
 
   @media (max-width: 768px) {
     transform: translateX(calc($width-arrow-mobile * 5 - 200%));
+  }
+
+  &:active {
+    cursor: grab;
   }
 
   &__goLeft {
