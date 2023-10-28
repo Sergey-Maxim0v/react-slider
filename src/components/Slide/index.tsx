@@ -10,7 +10,7 @@ const Slide: FC<ISlide> = ({ number, className }) => {
       case 1:
         return styles.slide_orange;
       case 2:
-        return styles.slide_yellow;
+        return styles.slide_white;
       case 3:
         return styles.slide_green;
       case 4:
@@ -20,12 +20,12 @@ const Slide: FC<ISlide> = ({ number, className }) => {
       case 6:
         return styles.slide_violet;
       case 7:
-        return styles.slide_white;
+        return styles.slide_yellow;
       case 8:
         return styles.slide_black;
 
       default:
-        return styles.slide_white;
+        return number % 2 ? styles.slide_blue : styles.slide_green;
     }
   };
 

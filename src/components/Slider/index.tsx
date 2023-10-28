@@ -12,7 +12,7 @@ import { useGetSlideNodeList } from "../../hooks/useGetSlideNodeList";
 import { useMouseMove } from "../../hooks/useMouseMove";
 
 const ANIMATION_TIME = 200;
-const SLIDES_COUNT = 8;
+const SLIDES_COUNT = 12;
 
 const Slider: FC<ISlider> = ({
   autoPlay = false,
