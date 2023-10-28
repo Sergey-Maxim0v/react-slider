@@ -1,6 +1,6 @@
-<h1 style="text-align: center;">Slider (React, Typescript)</h1>
+<h1 align="center">Slider (React, Typescript)</h1>
 
-<div style="text-align: center;">
+<div align="center">
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Sergey-Maxim0v/react-slider)
 ![GitHub top language](https://img.shields.io/github/languages/top/Sergey-Maxim0v/react-slider)
@@ -15,35 +15,35 @@
 
 <h2 align="center">Available Scripts</h2>
 
-<p style="text-align: center;">
+<p align="center">
 npm run dev
 </p>
 
-<p style="text-align: center;">
+<p align="center">
 npm run build
 </p>
 
-<p style="text-align: center;">
+<p align="center">
 npm run lint
 </p>
 
-<p style="text-align: center;">
+<p align="center">
 npm run preview
 </p>
 
 ---
 
-<h2 style="text-align: center;">
+<h2 align="center">
 UI-Kit Slider
 </h2>
 
-<p style="text-align: center;">
+<p align="center">
 Slider is controlled using the keyboard and mouse.
 </p>
 
 ---
 
-<div style="text-align: center;">
+<div align="center">
 
 <img src="src/assets/images/readme-1.png" alt="">
 
