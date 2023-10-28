@@ -16,6 +16,7 @@ const SLIDES_COUNT = 8;
 
 const Slider: FC<ISlider> = ({
   autoPlay = false,
+  mouseDraggable = false,
   autoPlayTime = 5000,
   width = "100%",
   height = "100%",
@@ -73,6 +74,7 @@ const Slider: FC<ISlider> = ({
   });
 
   useMouseMove({
+    mouseDraggable,
     ref: sliderRef,
     onLeft: () => changeSlide(-1),
     onRight: () => changeSlide(1),

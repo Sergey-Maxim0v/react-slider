@@ -20,7 +20,7 @@ function App() {
           height: "500px",
         }}
       >
-        <Slider autoPlay autoPlayTime={4000} />
+        <Slider autoPlay autoPlayTime={4000} mouseDraggable />
       </div>
     </div>
   );

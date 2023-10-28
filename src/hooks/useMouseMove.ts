@@ -1,18 +1,24 @@
 import { RefObject, useEffect, useRef } from "react";
 
 export const useMouseMove = ({
+  mouseDraggable,
   onLeft,
   onRight,
   onUp,
   onDown,
   ref,
 }: {
+  mouseDraggable?: boolean;
   ref?: RefObject<HTMLElement>;
   onLeft?: () => void;
   onRight?: () => void;
   onUp?: () => void;
   onDown?: () => void;
 }) => {
+  if (!mouseDraggable) {
+    return;
+  }
+
   const moveRef = useRef({
     isStarted: false,
     moveStart: { x: 0, y: 0, time: Date.now() },
