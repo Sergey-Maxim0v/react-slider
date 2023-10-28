@@ -41,6 +41,13 @@ UI-Kit Slider
 Slider is controlled using the keyboard and mouse.
 </p>
 
+<p align="center">
+Changing slides is possible:
+using arrow buttons, dot buttons, swiping.
+And optionally:
+automatically, dragging the mouse.
+</p>
+
 ---
 
 <div align="center">
