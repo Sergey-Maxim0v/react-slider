@@ -19,7 +19,7 @@ export const useSwipe = ({
 
   const fnsRef = useRef({ onLeft, onRight, onUp, onDown });
 
-  const target = ref.current ?? window;
+  const target = ref?.current ?? window;
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
@@ -55,12 +55,15 @@ export const useSwipe = ({
       }
     };
 
-    target.addEventListener("touchstart", handleTouchStart);
-    target.addEventListener("touchend", handleTouchEnd);
+    target.addEventListener("touchstart", handleTouchStart as EventListener);
+    target.addEventListener("touchend", handleTouchEnd as EventListener);
 
     return () => {
-      target.removeEventListener("touchstart", handleTouchStart);
-      target.removeEventListener("touchend", handleTouchEnd);
+      target.removeEventListener(
+        "touchstart",
+        handleTouchStart as EventListener,
+      );
+      target.removeEventListener("touchend", handleTouchEnd as EventListener);
     };
-  }, [ref.current]);
+  }, [ref?.current]);
 };

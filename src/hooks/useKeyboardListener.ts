@@ -1,11 +1,11 @@
-import { MutableRefObject, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 
 export const useKeyboardListener = ({
   sliderRef,
   changeSlide,
   isInFocus,
 }: {
-  sliderRef: MutableRefObject<HTMLDivElement>;
+  sliderRef: RefObject<HTMLDivElement>;
   isInFocus: boolean;
   changeSlide: (direction: -1 | 1) => Promise<void>;
 }) => {
@@ -30,6 +30,6 @@ export const useKeyboardListener = ({
 
     sliderRef.current.addEventListener("keydown", listener);
 
-    return () => sliderRef.current.removeEventListener("keydown", listener);
+    return () => sliderRef.current!.removeEventListener("keydown", listener);
   }, [isInFocus]);
 };

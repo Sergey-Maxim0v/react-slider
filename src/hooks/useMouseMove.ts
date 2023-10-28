@@ -9,7 +9,7 @@ export const useMouseMove = ({
   ref,
 }: {
   mouseDraggable?: boolean;
-  ref?: RefObject<HTMLElement>;
+  ref: RefObject<HTMLElement>;
   onLeft?: () => void;
   onRight?: () => void;
   onUp?: () => void;
@@ -70,12 +70,12 @@ export const useMouseMove = ({
       }
     };
 
-    target.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
+    target.addEventListener("mousedown", handleMouseDown as EventListener);
+    window.addEventListener("mouseup", handleMouseUp as EventListener);
 
     return () => {
-      target.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
+      target.removeEventListener("mousedown", handleMouseDown as EventListener);
+      window.removeEventListener("mouseup", handleMouseUp as EventListener);
     };
   }, [ref.current]);
 };
