@@ -20,10 +20,6 @@ const Slider: FC<ISlider> = ({
   width = "100%",
   height = "100%",
 }) => {
-  // TODO: mouse move, scroll listeners
-
-  // TODO: scale rotate animations
-
   // @ts-ignore
   const sliderRef = useRef<HTMLDivElement>(null);
 
