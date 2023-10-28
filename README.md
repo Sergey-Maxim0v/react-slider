@@ -45,10 +45,6 @@ Slider is controlled using the keyboard and mouse.
 
 <div style="text-align: center;">
 
-[//]: # "TODO: pictures"
-[//]: # '<img src="src/assets/images/readme-1.png" alt="">'
-[//]: # '<img src="src/assets/images/readme-2.png" alt="">'
-[//]: # '<img src="src/assets/images/readme-3.png" alt="">'
-[//]: # '<img src="src/assets/images/readme-4.png" alt="">'
+<img src="src/assets/images/readme-1.png" alt="">
 
 </div>
